@@ -1,3 +1,7 @@
+
+
+
+
 # Microservices Node.js Project
 
 A simple event-driven microservices demo built with Node.js, Express, and React.
@@ -132,3 +136,74 @@ Then open `http://localhost:3000` in your browser.
 
 - Data is stored in-memory in each service. Restarting a service clears its local state.
 - Event fan-out currently uses hardcoded localhost endpoints in `event-bus/index.js`.
+
+
+
+
+
+
+
+
+# optimistic lock
+const prd = await prods.findOne({id: sjdskgjds})
+if qty < 1 throw err
+5 - 1=> qty 4
+update prd qty to 4
+
+prd.findOneAndUpdate({id: sjdskgjds}, {$set: {qty: 4}})
+prd.findOneAndUpdate({id: sjdskgjds}, {$inc: -sentQty})
+const result = await prd.findOneAndUpdate({id: sjdskgjds, qty: {$gte: sentQty}}, {$inc: -sentQty})
+if(!result){
+    throw err quantity is not sufficient
+}
+
+
+
+
+
+
+
+# pessimestic lock
+start trx
+get product for update 
+check if qty is enough
+update qty to be -1
+commit
+
+
+
+
+
+const mznAcc = findone(id: 1)
+const aliAcc = findone(id: 2)
+
+mznAcc.balance >= 200, else throw err
+update mazen to be balance - 200 where balance >= 200
+if(no update) throw error
+update ali to balance + 200
+
+
+
+
+
+get random task where task is not started
+task (id: 42)
+
+update task where id=42 and status = not started set status= in progress
+
+
+
+
+
+
+
+
+
+
+start trx
+insert post 
+
+await publish event
+publish event
+
+commit
